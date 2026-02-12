@@ -4,5 +4,5 @@ helm:
     value: rkdockerhub420/hello-world-ui
     forcestring: true
   - name: image.tag
-    value: "1.4"
+    value: "1.5"
     forcestring: true
