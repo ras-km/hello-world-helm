@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "hello-world.fullname" . }}-web-access
+  namespace: hello-world
+spec:
+  podSelector:
+    matchLabels:
+      app: {{ include "hello-world.name" . }}
+  policyTypes:
+  - Ingress
+  ingress:
+  # Allow traffic from Ingress controller
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: ingress-nginx
+    ports:
+    - protocol: TCP
+      port: 80
+  # Allow traffic from same namespace (for health checks, etc)
+  - from:
+    - podSelector: {}
+    ports:
+    - protocol: TCP
+      port: 80
