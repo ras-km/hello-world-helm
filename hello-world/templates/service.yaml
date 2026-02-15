@@ -1,11 +1,25 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "hello-world.fullname" . }}
+  name: {{ include "hello-world.fullname" . }}-active
 spec:
   type: {{ .Values.service.type }}
-  selector:
-    app: {{ include "hello-world.name" . }}
   ports:
     - port: {{ .Values.service.port }}
       targetPort: 80
+      protocol: TCP
+  selector:
+    app: {{ include "hello-world.name" . }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "hello-world.fullname" . }}-preview
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 80
+      protocol: TCP
+  selector:
+    app: {{ include "hello-world.name" . }}
