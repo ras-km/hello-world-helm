@@ -22,4 +22,5 @@ service:
 resources: {}
 
 ingress:
-  enabled: false
+  enabled: true
+  host: hello-world.local
